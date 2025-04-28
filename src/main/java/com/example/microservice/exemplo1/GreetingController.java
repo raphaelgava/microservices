@@ -1,4 +1,4 @@
-package com.example.microservice;
+package com.example.microservice.exemplo1;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

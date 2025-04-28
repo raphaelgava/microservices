@@ -1,15 +1,19 @@
-package com.example.microservice;
+package com.example.microservice.controllers;
 
 import com.example.microservice.exceptions.UnsupportedMathOperationException;
+import com.example.microservice.math.SimpleMath;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import static com.example.microservice.converter.NumberConverter.convertToDouble;
+import static com.example.microservice.converter.NumberConverter.isNumeric;
+
 
 @RestController
 public class MathController {
-    private static final String template = "Hello, %s!!!";
-    private final AtomicLong counter = new AtomicLong(); //Multithread
+    private final AtomicLong counter = new AtomicLong(); //Multithread[
+    private SimpleMath math = new SimpleMath();
 
     @RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET) //Recuperar dados da url
     public Double sum(@PathVariable(value = "numberOne") String numberOne,
@@ -18,7 +22,7 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return convertToDouble(numberOne) + convertToDouble(numberTwo);
+        return math.sum(convertToDouble(numberOne), convertToDouble(numberTwo));
     }
 
     @RequestMapping(value = "/diff/{numberOne}/{numberTwo}", method = RequestMethod.GET) //Recuperar dados da url
@@ -28,7 +32,7 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+        return math.diff(convertToDouble(numberOne),convertToDouble(numberTwo));
     }
 
     @RequestMapping(value = "/prod/{numberOne}/{numberTwo}", method = RequestMethod.GET) //Recuperar dados da url
@@ -38,7 +42,7 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+        return math.prod(convertToDouble(numberOne),convertToDouble(numberTwo));
     }
 
     @RequestMapping(value = "/quot/{numberOne}/{numberTwo}", method = RequestMethod.GET) //Recuperar dados da url
@@ -48,7 +52,7 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+        return math.quot(convertToDouble(numberOne), convertToDouble(numberTwo));
     }
 
     @RequestMapping(value = "/avg/{numberOne}/{numberTwo}", method = RequestMethod.GET) //Recuperar dados da url
@@ -58,7 +62,7 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+        return math.avg(convertToDouble(numberOne), convertToDouble(numberTwo));
     }
 
     @RequestMapping(value = "/root/{numberOne}", method = RequestMethod.GET) //Recuperar dados da url
@@ -67,37 +71,8 @@ public class MathController {
             //throw new Exception();
             throw new UnsupportedMathOperationException("Please set a numeric value");
         }
-        return Math.sqrt(convertToDouble(numberOne));
+        return math.root(convertToDouble(numberOne));
     }
 
-    private Double convertToDouble(String strNumber) {
-        if (strNumber == null)
-            return 0D;
 
-        String number = strNumber.replaceAll(",", ".");
-        if (isNumeric(number))
-            return Double.parseDouble(number);
-
-        return 0D;
-    }
-
-    private boolean isNumeric(String strNumber) {
-        if (strNumber == null)
-            return false;
-
-        String number = strNumber.replaceAll(",", ".");
-
-        //[-+]?
-        //Indica que o número pode opcionalmente começar com um sinal de mais (+) ou menos (-). O ? significa que essa parte é opcional.
-
-        //[0-9]*:
-        //Aqui, [0-9] representa qualquer dígito de 0 a 9, e o * indica que pode haver zero ou mais dígitos antes do ponto decimal.
-
-        //\\.?:
-        //O \\. representa um ponto decimal. O ? indica que o ponto decimal também é opcional, ou seja, o número pode ser inteiro ou decimal.
-
-        //[0-9]+:
-        //Finalmente, [0-9]+ exige que haja pelo menos um dígito após o ponto decimal (se existir). O + significa que deve haver um ou mais dígitos.
-        return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-    }
 }
