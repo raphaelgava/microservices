@@ -1,4 +1,4 @@
-package com.example.microservice;
+package com.example.microservice.exemplo1;
 
 public class Greeting {
     private final long id;
