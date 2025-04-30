@@ -1,4 +1,4 @@
-package com.example.microservice.converter;
+package com.example.microservice.exemplo2.converter;
 
 public class NumberConverter {
     public static Double convertToDouble(String strNumber) {

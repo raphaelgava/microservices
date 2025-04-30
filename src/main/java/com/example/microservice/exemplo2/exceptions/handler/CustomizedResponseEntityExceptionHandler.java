@@ -1,7 +1,7 @@
-package com.example.microservice.exceptions.handler;
+package com.example.microservice.exemplo2.exceptions.handler;
 
-import com.example.microservice.exceptions.ExceptionResponse;
-import com.example.microservice.exceptions.UnsupportedMathOperationException;
+import com.example.microservice.exemplo2.exceptions.ExceptionResponse;
+import com.example.microservice.exemplo2.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

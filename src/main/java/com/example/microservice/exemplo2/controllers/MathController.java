@@ -1,13 +1,13 @@
-package com.example.microservice.controllers;
+package com.example.microservice.exemplo2.controllers;
 
-import com.example.microservice.exceptions.UnsupportedMathOperationException;
-import com.example.microservice.math.SimpleMath;
+import com.example.microservice.exemplo2.exceptions.UnsupportedMathOperationException;
+import com.example.microservice.exemplo2.math.SimpleMath;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import static com.example.microservice.converter.NumberConverter.convertToDouble;
-import static com.example.microservice.converter.NumberConverter.isNumeric;
+import static com.example.microservice.exemplo2.converter.NumberConverter.convertToDouble;
+import static com.example.microservice.exemplo2.converter.NumberConverter.isNumeric;
 
 
 @RestController
