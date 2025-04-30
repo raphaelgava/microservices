@@ -1,4 +1,4 @@
-package com.example.microservice.math;
+package com.example.microservice.exemplo2.math;
 
 public class SimpleMath {
     

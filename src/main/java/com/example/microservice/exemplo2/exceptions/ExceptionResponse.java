@@ -1,4 +1,4 @@
-package com.example.microservice.exceptions;
+package com.example.microservice.exemplo2.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;
