@@ -1,6 +1,6 @@
 package com.example.microservice.exemplo3.controllers;
 
-import com.example.microservice.exemplo3.model.Person;
+import com.example.microservice.exemplo3.models.Person;
 import com.example.microservice.exemplo3.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

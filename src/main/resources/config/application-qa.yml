@@ -1,0 +1,25 @@
+# exemplo4
+spring:
+  application:
+    name: microservice
+
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+
+#exemplo 4
+#propertie específica da aplicação
+greeting-service:
+    greeting: "Hola"
+    default-value: "Mi mundo"
+
+#propertie para exposição das informações da aplicação pelo actuator
+management:
+    endpoints:
+        web:
+            exposure:
+                include:
+                  - '*'
+

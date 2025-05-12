@@ -1,7 +1,7 @@
-package com.example.microservice;
+package com.example.microservice.exemplo3;
 
 import com.example.microservice.exemplo3.controllers.PersonController;
-import com.example.microservice.exemplo3.model.Person;
+import com.example.microservice.exemplo3.models.Person;
 import com.example.microservice.exemplo3.services.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
+//@SpringBootTest quando você precisa de um teste mais abrangente que envolva a aplicação inteira e todas as suas interações.
 @SpringBootTest
 public class PersonControllerTest {
 

@@ -2,6 +2,10 @@
 spring:
   application:
     name: microservice
+  #exemplo4
+  profiles:
+      active:
+        - native #busca local
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,7 +20,7 @@ spring:
     properties:
       hibernate:
 #        dialect: org.hibernate.dialect.MySQL8Dialect #depreciado
-        dialect: org.hibernate.dialect.MySQLDialect # Em teoria, esse ﷿ o default
+        dialect: org.hibernate.dialect.MySQLDialect # Em teoria, esse é o default
     show-sql: true
     open-in-view: false # https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
 
@@ -25,6 +29,25 @@ spring:
       org:
         hibernate:
           SQL: DEBUG
+
+#exemplo 4
+#propertie específica da aplicação
+greeting-service:
+    greeting: "Olá"
+    default-value: "Meu mundo"
+
+#propertie para exposição das informações da aplicação pelo actuator
+management:
+    endpoints:
+        web:
+            exposure:
+                include:
+                  - '*'
+
+#propertie do cloud server -> para funcionar os exemplos 1, 2, 3 e o Greeting do 4 tem que estar comentado
+server:
+    port: 8888
+
 
 #Representa﷿﷿o em properties
 #spring.application.name = microservice
