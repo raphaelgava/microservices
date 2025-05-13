@@ -61,10 +61,10 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 			<version>4.2.2</version> <!-- por algum motivo só funcionou colocando a versão -->
 		</dependency>
 		<!-- Fim exemplo 4 -->
@@ -80,7 +80,7 @@
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- Fim testes -->
 	</dependencies>
 
 	<build>

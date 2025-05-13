@@ -1,11 +1,49 @@
 # exemplo3
+#spring:
+#  application:
+#    name: microservice
+#
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/rest_with_spring_boot?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+#    username: root
+#    password: admin123
+#
+#  jpa:
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+##        dialect: org.hibernate.dialect.MySQL8Dialect #depreciado
+#        dialect: org.hibernate.dialect.MySQLDialect # Em teoria, esse é o default
+#    show-sql: true
+#    open-in-view: false # https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
+#
+#  logging:
+#    level:
+#      org:
+#        hibernate:
+#          SQL: DEBUG
+
+#Representa﷿﷿o em properties
+#spring.application.name = microservice
+#spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
+#spring.datasource.url = jdbc:mysql://localhost:3306/rest_with_spring_boot?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+#spring.datasource.username = root
+#spring.datasource.password = admin123
+#
+#spring.jpa.generate-ddl = true
+#spring.jpa.hibernate.ddl-auto = update
+#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
+#spring.jpa.show-sql = true
+#
+#logging.level.org.hibernate.SQL = DEBUG
+
+# exemplo 4
 spring:
   application:
-    name: microservice
-  #exemplo4
-  profiles:
-      active:
-        - native #busca local
+    name: greeting-service
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,35 +68,37 @@ spring:
         hibernate:
           SQL: DEBUG
 
-#exemplo 4
-#propertie específica da aplicação
+  #Abaixo a mensagem que vai exibir se a aplicação achar o servidor:
+  #2025-05-12T23:56:14.004-03:00  INFO 17360 --- [greeting-service] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:8888/
+  config:
+    import: optional:configserver:http://localhost:8888/
+
+  cloud:
+    config:
+      profile: qa #2025-05-13T00:04:22.060-03:00  INFO 19484 --- [greeting-service] [  restartedMain] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=greeting-service, profiles=[qa], label=null, version=04d630fafe6c368512837bbb6b1be72ccff6565e, state=
+
+#property específica da aplicação
 greeting-service:
-    greeting: "Olá"
-    default-value: "Meu mundo"
+  greeting: "Ciao"
+  default-value: "Mio mondo yml"
 
-#propertie para exposição das informações da aplicação pelo actuator
+#property para exposição das informações da aplicação pelo actuator
 management:
-    endpoints:
-        web:
-            exposure:
-                include:
-                  - '*'
+  endpoints:
+      web:
+          exposure:
+              include:
+                - '*'
+                #- refresh
 
-#propertie do cloud server -> para funcionar os exemplos 1, 2, 3 e o Greeting do 4 tem que estar comentado
+  #adicionando informação do endpoint actuator/health para debug
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+
 server:
-    port: 8888
+  port: 8080
 
 
-#Representa﷿﷿o em properties
-#spring.application.name = microservice
-#spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
-#spring.datasource.url = jdbc:mysql://localhost:3306/rest_with_spring_boot?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
-#spring.datasource.username = root
-#spring.datasource.password = admin123
-#
-#spring.jpa.generate-ddl = true
-#spring.jpa.hibernate.ddl-auto = update
-#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
-#spring.jpa.show-sql = true
-#
-#logging.level.org.hibernate.SQL = DEBUG
+
