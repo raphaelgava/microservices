@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: rest_with_spring_boot
+#      MYSQL_USER: root # Não precisa especificar se for usuário root!!!!
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # Comando para acessar o mysql do docker
+    # PS C:\Users\Raphael\IdeaProjects\microservices> docker exec -it mysql_db mysql -u root -padmin123
+    # mysql: [Warning] Using a password on the command line interface can be insecure.
+    # Welcome to the MySQL monitor.  Commands end with ; or \g.
+    # Your MySQL connection id is 16
+    # Server version: 9.3.0 MySQL Community Server - GPL
+
+  microservice:
+    image: raphaelgava1/microservice
+    container_name: microservice
+    build: .
+    restart: always
+    depends_on:
+      - db
+    environment:
+      #Esse erro "Public Key Retrieval is not allowed" geralmente ocorre quando o MySQL está configurado para exigir um mecanismo de autenticação seguro para conexões SSL/TLS.
+      #Adicione: &allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/rest_with_spring_boot?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
+      SPRING_CLOUD_CONFIG_URI: http://localhost:8888/
+      SPRING_PROFILES_ACTIVE: qa
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
