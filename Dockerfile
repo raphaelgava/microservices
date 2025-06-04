@@ -41,3 +41,24 @@ ENTRYPOINT ["java","-Djava.security.edg=file:/dev/./urandom","-jar","/app.jar"]
 # Command of statistics: docker stats
 # Command to run process with memory and cpu limited: docker run -p 80:80 -d -m 512m --cpu-quota 80000 raphaelgava1/microservice:0.0.1-SNAPSHOT
 # Command : docker system df
+# Command to list network: C:\Users\Raphael\IdeaProjects\microservices> docker network ls
+#NETWORK ID     NAME                       DRIVER    SCOPE
+#6bab9e832d81   bridge                     bridge    local
+#22edb9bc6516   host                       host      local
+#e45befd17820   microservices_default      bridge    local
+#4bab983453e4   microservices_my_network   bridge    local
+#73a602f76b8e   none                       null      local
+# Command to inspect: C:\Users\Raphael\IdeaProjects\microservices> docker network inspect microservices_my_network
+#[
+#    {
+#        "Name": "microservices_my_network",
+#        "Id": "4bab983453e49b5afb9b24784a7635ad376273e1320a80ff59a89664dafc1852",
+#        "Created": "2025-05-20T17:05:58.13690862Z",
+#        "Scope": "local",
+#        "Driver": "bridge",
+#        "EnableIPv4": true,
+#        "EnableIPv6": false,
+#Zipkin
+#Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in service architectures
+# Command to install: C:\Users\Raphael\IdeaProjects\microservices> docker run -p 9411:9411 openzipkin/zipkin:latest
+# Command to acess: http://localhost:9411/zipkin/

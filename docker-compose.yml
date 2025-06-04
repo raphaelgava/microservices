@@ -1,15 +1,17 @@
 services:
   db:
-    image: mysql:latest
+    image: mysql:latest  #5.7.22
+    #command: mysqld --default_authentication_plugin=mysql_native_password
     container_name: mysql_db
-    restart: always
+    restart: always #politica de restart do container se der algum problema
     environment:
       MYSQL_ROOT_PASSWORD: admin123
       MYSQL_DATABASE: rest_with_spring_boot
 #      MYSQL_USER: root # Não precisa especificar se for usuário root!!!!
       MYSQL_PASSWORD: admin123
+#      TZ: America/Sao_Paulo #Para ajustar o horário
     ports:
-      - "3306:3306"
+      - "3306:3306" #host:container
     volumes:
       - mysql_data:/var/lib/mysql
     # Comando para acessar o mysql do docker
@@ -18,13 +20,15 @@ services:
     # Welcome to the MySQL monitor.  Commands end with ; or \g.
     # Your MySQL connection id is 16
     # Server version: 9.3.0 MySQL Community Server - GPL
+    networks:
+      - my_network
 
   microservice:
     image: raphaelgava1/microservice
     container_name: microservice
     build: .
     restart: always
-    depends_on:
+    depends_on: #qual container é dependente!
       - db
     environment:
       #Esse erro "Public Key Retrieval is not allowed" geralmente ocorre quando o MySQL está configurado para exigir um mecanismo de autenticação seguro para conexões SSL/TLS.
@@ -38,6 +42,13 @@ services:
       SPRING_PROFILES_ACTIVE: qa
     ports:
       - "8080:8080"
+    networks:
+      - my_network
 
 volumes:
   mysql_data:
+
+networks:
+  my_network:
+    driver: bridge
+  #permite criar redes personalizadas para conectar seus containers de forma organizada e segura. Isso é útil para controle de comunicação entre serviços, isolamento de redes e configuração de DNS interno
