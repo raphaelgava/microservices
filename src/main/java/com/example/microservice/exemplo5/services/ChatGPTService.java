@@ -25,6 +25,7 @@ public class ChatGPTService {
     @Autowired
     private RestTemplate template;
 
+    //https://platform.openai.com/docs/api-reference/chat
     public Object chat(String prompt) throws JsonProcessingException {
         logger.info("Starting chat");
         ChatGPTRequest request = new ChatGPTRequest(model, prompt);
