@@ -100,5 +100,9 @@ management:
 server:
   port: 8080
 
-
-
+#exemplo 5
+openai:
+  model: gpt-4.1
+  api:
+    key: ${OPENAI_API_KEY} #pegando da variavel de ambiente pra não commitar a chave e deixar publica
+    url: https://api.openai.com/v1/chat/completions

@@ -81,6 +81,10 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- Fim testes -->
+
+		<!-- Começo exemplo 5 -->
+
+		<!-- Fim exemplo 5 -->
 	</dependencies>
 
 	<build>
